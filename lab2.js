@@ -1,4 +1,5 @@
 var trapeziums = new Array();
+var tableContainer = document.getElementById("tableContainer");
 
 class Trapezium {
     constructor(base1, base2, side1, side2) {
@@ -54,64 +55,71 @@ class Trapezium {
     }
 }
 
-document.getElementById("AddTrapezium").addEventListener("click", function (event) {
-    if (trapeziums.length == 0) {
-        var table = document.getElementById("table");
-        var row = table.insertRow(0);
+outputResultInTable = () => {
+    document.getElementById("table").remove();
+    var table = document.createElement("table");
+    table.id = "table";
+    tableContainer.appendChild(table);
+    trapeziums.forEach((trapezium, i) => {
+        var row = table.insertRow(i);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
-        cell1.innerHTML = "Number";
-        cell2.innerHTML = "Base1";
-        cell3.innerHTML = "Base2";
-        cell4.innerHTML = "Side1";
-        cell5.innerHTML = "Side2";
-    }
+        cell1.innerHTML = i;
+        cell2.innerHTML = trapezium.base1;
+        cell3.innerHTML = trapezium.base2;
+        cell4.innerHTML = trapezium.side1;
+        cell5.innerHTML = trapezium.side2;
+    });
+    var row = table.insertRow(0);
+    var cellForName1 = row.insertCell(0);
+    var cellForName2 = row.insertCell(1);
+    var cellForName3 = row.insertCell(2);
+    var cellForName4 = row.insertCell(3);
+    var cellForName5 = row.insertCell(4);
+    cellForName1.innerHTML = "Index";
+    cellForName2.innerHTML = "Base1";
+    cellForName3.innerHTML = "Base2";
+    cellForName4.innerHTML = "Side1";
+    cellForName5.innerHTML = "Side2";
+};
+
+document.getElementById("AddTrapezium").addEventListener("click", function(event) {
     var base1 = document.getElementById('Base1').value;
     var base2 = document.getElementById('Base2').value;
     var side1 = document.getElementById('Side1').value;
     var side2 = document.getElementById('Side2').value;
     trapeziums.push(new Trapezium(base1, base2, side1, side2));
-    var table = document.getElementById("table");
-    var row = table.insertRow(trapeziums.length);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    cell1.innerHTML = trapeziums.length - 1;
-    cell2.innerHTML = base1;
-    cell3.innerHTML = base2;
-    cell4.innerHTML = side1;
-    cell5.innerHTML = side2;
+    outputResultInTable();
 });
 
-document.getElementById("ChangeSize").addEventListener("click", function (event) {
+document.getElementById("deleteFigure").addEventListener("click", function(event) {
+    var number = document.getElementById("DeleteFigureNumber").value;
+    trapeziums.splice(number, 1);
+    outputResultInTable();
+});
+
+document.getElementById("ChangeSize").addEventListener("click", function(event) {
     var number = document.getElementById('ChangeSizeNumber').value;
     var coefficient = document.getElementById('coefficient').value;
     trapeziums[number].changeSize(coefficient);
-    var temp = parseInt(number) + 1;
-    var record = document.getElementById("table").rows[temp];
-    record.cells[1].innerHTML = trapeziums[number].base1;
-    record.cells[2].innerHTML = trapeziums[number].base2;
-    record.cells[3].innerHTML = trapeziums[number].side1;
-    record.cells[4].innerHTML = trapeziums[number].side2;
+    outputResultInTable();
 });
 
-document.getElementById("GetFigureInfo").addEventListener("click", function (event) {
+document.getElementById("GetFigureInfo").addEventListener("click", function(event) {
     var number = document.getElementById('GetFigureNumber').value;
-    var message = "Perimeter: " + trapeziums[number].getPerimeter()
-        + "\nArea: " + trapeziums[number].getArea()
-        + "\nMiddle line: " + trapeziums[number].getMiddleLine()
-        + "\nHeight: " + trapeziums[number].getHeight();
+    var message = "Perimeter: " + trapeziums[number].getPerimeter() +
+        "\nArea: " + trapeziums[number].getArea() +
+        "\nMiddle line: " + trapeziums[number].getMiddleLine() +
+        "\nHeight: " + trapeziums[number].getHeight();
     var p = document.createElement("p");
     p.textContent = message;
     document.getElementById("messagesList").appendChild(p);
 });
 
-document.getElementById("AreSimilar").addEventListener("click", function (event) {
+document.getElementById("AreSimilar").addEventListener("click", function(event) {
     var number1 = document.getElementById('IsSimilar1').value;
     var number2 = document.getElementById('IsSimilar2').value;
     var result = trapeziums[number1].isSimilar(trapeziums[number2]) ? "similar" : "not similar";

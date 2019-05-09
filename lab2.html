@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="lab2.css">
 </head>
+
 <body>
     <div class="row">&nbsp;
         <span>Base1:</span>
@@ -17,32 +18,40 @@
         <input class="button" type="button" id="AddTrapezium" value="Add trapezium" />
     </div>
     <br/>
-        <div class="row">
+    <div class="row">
         <span>Number in array:</span>
-        <input class="input" type="text" id="ChangeSizeNumber" value="">
+        <input class="input" type="text" id="ChangeSizeNumber" value="" />
         <span>Сoefficient:</span>
-        <input class="input" type="text" id="coefficient" value="">
+        <input class="input" type="text" id="coefficient" value="" />
         <input class="button" type="button" id="ChangeSize" value="Change Size" />
     </div>
     </br>
     <div class="row">
         <span>Number in array:</span>
-        <input class="input" type="text" id="GetFigureNumber" value="">
+        <input class="input" type="text" id="GetFigureNumber" value="" />
         <input class="button" type="button" id="GetFigureInfo" value="Get figure info" />
     </div>
     <br/>
     <div class="row">
         <span>Number in array 1:</span>
-        <input class="input" type="text" id="IsSimilar1" value="">
+        <input class="input" type="text" id="IsSimilar1" value="" />
         <span>Number in array 2:</span>
-        <input class="input" type="text" id="IsSimilar2" value="">
+        <input class="input" type="text" id="IsSimilar2" value="" />
         <input class="button" type="button" id="AreSimilar" value="Are similar" />
     </div>
+    <div class="row">
+        <span>Number in array:</span>
+        <input class="input" type="text" id="DeleteFigureNumber" value="" />
+        <input class="button" type="button" id="deleteFigure" value="Delete Figure" />
+    </div>
     <br/>
-    <table id="table">
-    </table>
+    <div id="tableContainer">
+        <table id="table">
+        </table>
+    </div>
     <div class="row" id="messagesList">
     </div>
     <script src="lab2.js"></script>
 </body>
+
 </html>
